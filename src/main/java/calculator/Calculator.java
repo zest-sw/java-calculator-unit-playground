@@ -42,7 +42,7 @@ public class Calculator {
                 try {
                     int value_int = Integer.parseInt(element);
                     if (value_int <0){
-                        throw new RuntimeException("입력 값이 0보자 작습니다.");
+                        throw new RuntimeException("입력 값이 0보다 작습니다.");
                     }
 
                     result += value_int;
