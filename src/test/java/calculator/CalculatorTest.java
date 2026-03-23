@@ -1,7 +1,7 @@
 package calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -73,7 +73,7 @@ class CalculatorTest {
             "'', 0",
             "'7', 7"
     })
-    void test_calculate_str(String input, int expected) {
+    void testCalculateStr(String input, int expected) {
         // Given & When
         Calculator calculator = new Calculator();
         int result = calculator.calculate_str(input);
@@ -81,4 +81,28 @@ class CalculatorTest {
         // Then
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    void negativeValueTest() {
+        Calculator calculator = new Calculator();
+
+        assertThatThrownBy(() -> {
+            calculator.calculate_str("-1,2,3");
+        })
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("입력 값이 0보다 작습니다");
+    }
+
+    @Test
+    void nonNumberTest() {
+        Calculator calculator = new Calculator();
+
+        assertThatThrownBy(() -> {
+            calculator.calculate_str("3,2,d");
+        })
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("숫자가 아닌 값이 입력되었습니다");
+    }
+
+
 }
