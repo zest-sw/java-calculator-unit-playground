@@ -67,7 +67,7 @@ public class Calculator {
 
     private void validatePositiveValue(int value) {
         if (value < 0){
-            throw new RuntimeException("입력 값이 0보자 작습니다.");
+            throw new RuntimeException("입력 값이 0보다 작습니다.");
         }
     }
 
