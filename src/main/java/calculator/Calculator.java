@@ -7,7 +7,7 @@ public class Calculator {
         return num1 + num2;
     }
 
-    int substract(int num1, int num2) {
+    int subtract(int num1, int num2) {
     return num1 - num2;
     }
 
@@ -48,19 +48,28 @@ public class Calculator {
         for (String element : values) {
             if (element == null || element.isEmpty()) continue;
 
-            try {
-                int value_int = Integer.parseInt(element);
-                if (value_int < 0) {
-                    throw new RuntimeException("입력 값이 0보다 작습니다.");
-                }
-                result += value_int;
-            } catch (NumberFormatException e) {
-                // 요구사항에 따라 0을 반환하거나 예외를 던질 수 있음
-                System.out.println("숫자가 아닌 값이 입력되었습니다: " + element);
-                return 0;
-            }
+            int value_int = parse_int(element);
+
+            validatePositiveValue(value_int);
+            result += value_int;
+
         }
         return result;
     }
+
+    private int parse_int(String element){
+        try {
+            return Integer.parseInt(element);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자가 아닌 값이 입력되었습니다: " + element);
+        }
+    }
+
+    private void validatePositiveValue(int value) {
+        if (value < 0){
+            throw new RuntimeException("입력 값이 0보자 작습니다.");
+        }
+    }
+
 
 }
